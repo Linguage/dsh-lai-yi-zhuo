@@ -2,6 +2,7 @@ name: Release DSH plugin
 
 on:
   push:
+    branches: [main]
     tags: ['v*']
   workflow_dispatch:
     inputs:
@@ -23,11 +24,11 @@ jobs:
     permissions:
       contents: write
     env:
-      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+      RELEASE_TAG: ${{ inputs.tag || (github.ref_type == 'tag' && github.ref_name) || '' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          ref: ${{ inputs.tag && format('refs/tags/{0}', inputs.tag) || github.ref }}
           persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
         with:
@@ -40,7 +41,7 @@ jobs:
           const manifest = JSON.parse(readFileSync('package.json'))
           const lock = JSON.parse(readFileSync('package-lock.json'))
           assert.match(manifest.version, /^\d+\.\d+\.\d+$/)
-          assert.equal(process.env.RELEASE_TAG, 'v' + manifest.version)
+          if (process.env.RELEASE_TAG) assert.equal(process.env.RELEASE_TAG, 'v' + manifest.version)
           assert.equal(lock.name, manifest.name)
           assert.equal(lock.version, manifest.version)
           assert.equal(lock.packages[''].name, manifest.name)
@@ -50,7 +51,15 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run package
+      - name: Verify committed install files
+        run: |
+          changes="$(git status --porcelain -- lib web)"
+          if [ -n "$changes" ]; then
+            printf '%s\n' 'Run npm run build and commit the updated lib/ and web/ files.' "$changes"
+            exit 1
+          fi
       - name: Publish GitHub Release
+        if: env.RELEASE_TAG != ''
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

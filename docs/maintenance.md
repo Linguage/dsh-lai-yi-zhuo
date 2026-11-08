@@ -32,11 +32,15 @@ npm run serve
 
 浏览器 `localStorage` 沿用 `dsh-board-games-*-v1` 与 `dsh-four-preferences`；部分棋类共用棋桌存档，新增棋种、纸牌与地方麻将有各自的键。四人玩法记录随机种子和动作，读回时重放。旧包迁移依赖同一游戏地址和兼容的存档键，包名与存档键分别维护。
 
+## 仓库安装文件
+
+DSH 的 GitHub 链接安装从默认分支读取包。修改代码后，运行 `npm run build`，将生成的 `lib/` 和 `web/` 与源码一同提交，包括已删除的旧资源。两个目录由构建脚本生成。主分支和版本标签的工作流都会重建，并检查提交中的安装文件与构建结果是否一致。
+
 ## 打包与发行
 
 1. 确定新版本，用 `npm version patch --no-git-tag-version` 等命令更新 manifest 与锁文件。在 `release-notes/v<版本>.md` 写明变化和更新要求。
 2. 跑完整检查和 `npm run package`。检查 `dist/dsh-lai-yi-zhuo-<版本>.tgz` 的入口、四个 Worker、许可及 `SHA256SUMS`，再做解包及 DSH 实装测试。发行包包含编译产物，演示图片、用户数据和开发依赖留在包外。
-3. 将版本提交推送到 `main`，再推送与 manifest 对齐的 `v<版本>` 标签。[发行工作流](../.github/workflows/release.yml)在 GitHub Actions 上从该标签构建并创建 Release。如果标签未触发运行，可在 Actions 手动选择同一个已推送的标签。
-4. 匿名下载实际附件，与 Release 的 `SHA256SUMS` 比对，再按[部署指南](deployment.md)从 DSH 侧栏打开验证。已发布附件需要变化时发新版本。
+3. 将包含 `lib/` 和 `web/` 的版本提交推送到 `main`，再推送与 manifest 对齐的 `v<版本>` 标签。[发行工作流](../.github/workflows/release.yml)在 GitHub Actions 上从该标签构建并创建 Release。如果标签未触发运行，可在 Actions 手动选择同一个已推送的标签。
+4. 在干净的 DSH profile 粘贴 GitHub 仓库地址，安装并从侧栏打开。匿名下载 Release 附件并核对 `SHA256SUMS`，再按[部署指南](deployment.md)检查安装。已发布附件需要变化时发新版本。
 
 首个公开版本的[发行记录](https://github.com/Linguage/dsh-lai-yi-zhuo/releases/tag/v0.3.1)保留原包和校验文件。文档更新可随 `main` 发布。

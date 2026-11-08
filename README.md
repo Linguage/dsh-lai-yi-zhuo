@@ -8,13 +8,18 @@
 
 ## 安装与更新
 
-1. 在 [GitHub Releases](https://github.com/Linguage/dsh-lai-yi-zhuo/releases/latest) 的 **Assets** 下下载 `dsh-lai-yi-zhuo-*.tgz`。首个公开版本为 [v0.3.1](https://github.com/Linguage/dsh-lai-yi-zhuo/releases/tag/v0.3.1)。
-2. 打开 DSH 的「插件 → 添加插件」，输入下载文件的绝对路径。插件声明兼容 DSH `>=0.2.0-0 <0.3.0`，已在 0.2.2-rc.1 验证。
-3. 在插件页启用「来一桌」，从左侧栏打开。
+1. 在 DSH 的「插件 → 添加插件」中粘贴下面的仓库地址。
 
-**安装请使用 Release 的 `.tgz` 附件。** GitHub 仓库首页用于浏览源码，仓库源码包和 Release 下的 **Source code** 压缩包均缺少运行所需的构建产物。遇到 `ERR_MODULE_NOT_FOUND` 或「无法从依赖变更中确定安装了哪一个包」时，见[部署指南](docs/deployment.md#安装故障)。
+   ```text
+   https://github.com/Linguage/dsh-lai-yi-zhuo
+   ```
 
-从旧包 `dsh-board-games` 迁移时，在同一 DSH profile 先卸载旧包，再安装新包。同一浏览器、同一 DSH 地址下保留的旧局可继续。后续同名版本的安装、校验及故障处理见[部署指南](docs/deployment.md)。
+2. 安装后点击「立即启用」，从侧栏打开「来一桌」。插件声明兼容 DSH `>=0.2.0-0 <0.3.0`。
+3. 如果插件列表已有「来一桌」，先在同一 DSH profile 卸载旧条目，再粘贴仓库地址安装。之前失败的 Git 安装也可能留下同名条目。
+
+需要固定版本或离线安装时，可从 [GitHub Releases](https://github.com/Linguage/dsh-lai-yi-zhuo/releases/latest) 下载 **Assets** 下的 `dsh-lai-yi-zhuo-*.tgz`，在 DSH 填写下载文件的绝对路径。
+
+从旧包 `dsh-board-games` 迁移时，同样先卸载旧包。同一浏览器、同一 DSH 地址下保留的旧局可继续。版本校验和故障处理见[部署指南](docs/deployment.md)。
 
 ## 开一桌
 

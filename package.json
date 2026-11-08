@@ -1,6 +1,6 @@
 {
   "name": "dsh-lai-yi-zhuo",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "type": "module",
   "description": "来一桌 · 棋类、纸牌与麻将的本地人机陪练",
