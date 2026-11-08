@@ -1,0 +1,69 @@
+{
+  "name": "dsh-lai-yi-zhuo",
+  "version": "0.3.1",
+  "private": true,
+  "type": "module",
+  "description": "来一桌 · 棋类、纸牌与麻将的本地人机陪练",
+  "author": "Linguage",
+  "license": "UNLICENSED",
+  "icon": "./icon.svg",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "web",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "THIRD_PARTY_NOTICES.txt"
+  ],
+  "engines": {
+    "node": ">=22.19",
+    "dsh": ">=0.2.0-0 <0.3.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": []
+    }
+  },
+  "scripts": {
+    "dev": "vite ui --host 127.0.0.1 --port 7346",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm run typecheck && npm test && npm run build",
+    "serve": "node scripts/serve.mjs",
+    "test:browser": "node scripts/check-browser.mjs",
+    "package": "node scripts/package.mjs",
+    "test:tables-browser": "node scripts/check-tables-browser.mjs",
+    "test:variants-browser": "node scripts/check-variants-browser.mjs",
+    "test:package": "node scripts/check-package.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "chess.js": "1.4.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Linguage/dsh-lai-yi-zhuo.git"
+  },
+  "homepage": "https://github.com/Linguage/dsh-lai-yi-zhuo#readme",
+  "bugs": {
+    "url": "https://github.com/Linguage/dsh-lai-yi-zhuo/issues"
+  }
+}
