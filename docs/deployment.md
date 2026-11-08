@@ -12,7 +12,7 @@ https://github.com/Linguage/dsh-lai-yi-zhuo
 
 安装后点击「立即启用」，从侧栏打开「来一桌」。进入棋桌开始五子棋，落一子即可检查人机应手。宿主兼容范围以包内 `engines.dsh` 为准，当前为 `>=0.2.0-0 <0.3.0`。
 
-仓库从 v0.3.2 起随源代码提供编译后的宿主入口、界面和计算线程。安装时无需运行构建脚本。以下是 CLI 的 Web profile 示例：
+仓库提供编译后的宿主入口、界面和计算线程，可直接安装。以下是 CLI 的 Web profile 示例：
 
 ```sh
 dsh plugin --profile web add https://github.com/Linguage/dsh-lai-yi-zhuo
@@ -26,8 +26,9 @@ dsh web
 ## 更新与存档
 
 - 插件列表已有同名包时，先在原 profile 卸载旧条目，再用仓库地址或新版本的 Release 包安装。若 DSH 提示重启，重启后核对侧栏和版本。
-- 从旧包 `dsh-board-games` 迁移时，先卸载旧包，再安装 `dsh-lai-yi-zhuo`。两个包共用游戏路由和存档键。
 - 对局和显示偏好保存在浏览器。卸载后在同一浏览器、同一 DSH 地址重新安装，可以继续保留的对局。换浏览器、清理站点数据、改变地址或端口会影响续局。
+
+跨包名迁移见 [v0.3.1 发行记录](https://github.com/Linguage/dsh-lai-yi-zhuo/releases/tag/v0.3.1)。
 
 ## 安装故障
 
